@@ -6,9 +6,16 @@ from collections import defaultdict
 
 BIRTH_YEAR = 1920
 
+
 def read_file():
-    wine_data = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', na_values='nan', keep_default_na=False).sort_values(by='Категория')
+    wine_data = pandas.read_excel(
+        'wine3.xlsx',
+        sheet_name='Лист1',
+        na_values='nan',
+        keep_default_na=False)\
+        .sort_values(by='Категория')
     return wine_data.to_dict(orient='records')
+
 
 def group_wine_cards(wine_cards):
     wine_cards_groups = defaultdict(list)
@@ -17,10 +24,12 @@ def group_wine_cards(wine_cards):
         wine_cards_groups[key].append(wine_card)
     return wine_cards_groups
 
+
 def get_company_age():
     current_year = datetime.date.today().year
     age = current_year - BIRTH_YEAR
     return age
+
 
 def main():
     env = Environment(
