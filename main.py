@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas
 import pprint
+from collections import defaultdict
 
 BIRTH_YEAR = 1920
 
@@ -11,10 +12,10 @@ def read_file():
     return excel_data_df.to_dict(orient='records')
 
 def group_wine_cards(wine_cards):
-    wine_cards_groups = {}
+    wine_cards_groups = defaultdict(list)
     for wine_card in wine_cards:
         key = wine_card['Категория']
-        wine_cards_groups.setdefault(key, []).append(wine_card)
+        wine_cards_groups[key].append(wine_card)
     return wine_cards_groups
 
 wine_cards = read_file()
