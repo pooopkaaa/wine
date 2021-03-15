@@ -2,7 +2,6 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas
-import pprint
 from collections import defaultdict
 
 BIRTH_YEAR = 1920
@@ -26,7 +25,6 @@ def get_company_age():
 company_age = get_company_age()
 wine_cards = read_file()
 wine_cards_groups = group_wine_cards(wine_cards)
-pprint.pprint(wine_cards_groups)
 
 env = Environment(
     loader=FileSystemLoader('.'),
