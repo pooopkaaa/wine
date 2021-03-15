@@ -34,7 +34,7 @@ delta_year = str(current_year - BIRTH_YEAR)
 
 rendered_page = template.render(
     delta_year=delta_year,
-    wine_cards=wine_cards,
+    wine_cards_groups=wine_cards_groups,
 )
 
 with open('index.html', 'w', encoding="utf8") as file:
