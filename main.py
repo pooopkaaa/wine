@@ -1,8 +1,15 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
+import pandas
 
 BIRTH_YEAR = 1920
+
+def read_file():
+    excel_data_df = pandas.read_excel('wine.xlsx', sheet_name='Лист1')
+    return excel_data_df.to_dict(orient='records')
+
+print(read_file())
 
 env = Environment(
     loader=FileSystemLoader('.'),
