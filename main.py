@@ -18,6 +18,12 @@ def group_wine_cards(wine_cards):
         wine_cards_groups[key].append(wine_card)
     return wine_cards_groups
 
+def get_company_age():
+    current_year = datetime.date.today().year
+    age = current_year - BIRTH_YEAR
+    return age
+
+company_age = get_company_age()
 wine_cards = read_file()
 wine_cards_groups = group_wine_cards(wine_cards)
 pprint.pprint(wine_cards_groups)
@@ -29,11 +35,10 @@ env = Environment(
 
 template = env.get_template('template.html')
 
-current_year = datetime.date.today().year
-delta_year = str(current_year - BIRTH_YEAR)
+
 
 rendered_page = template.render(
-    delta_year=delta_year,
+    company_age=company_age,
     wine_cards_groups=wine_cards_groups,
 )
 with open('index.html', 'w', encoding="utf8") as file:
