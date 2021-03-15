@@ -22,25 +22,26 @@ def get_company_age():
     age = current_year - BIRTH_YEAR
     return age
 
-company_age = get_company_age()
-wine_cards = read_file()
-wine_cards_groups = group_wine_cards(wine_cards)
+def main():
+    env = Environment(
+        loader=FileSystemLoader('.'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
 
-env = Environment(
-    loader=FileSystemLoader('.'),
-    autoescape=select_autoescape(['html', 'xml'])
-)
+    company_age = get_company_age()
+    wine_cards = read_file()
+    wine_cards_groups = group_wine_cards(wine_cards)
 
-template = env.get_template('template.html')
+    template = env.get_template('template.html')
+    rendered_page = template.render(
+        company_age=company_age,
+        wine_cards_groups=wine_cards_groups,
+    )
+    with open('index.html', 'w', encoding="utf8") as file:
+        file.write(rendered_page)
 
+    server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
+    server.serve_forever()
 
-
-rendered_page = template.render(
-    company_age=company_age,
-    wine_cards_groups=wine_cards_groups,
-)
-with open('index.html', 'w', encoding="utf8") as file:
-    file.write(rendered_page)
-
-server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
-server.serve_forever()
+if __name__ == "__main__":
+    main()
