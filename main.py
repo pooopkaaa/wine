@@ -9,7 +9,7 @@ def read_file():
     excel_data_df = pandas.read_excel('wine.xlsx', sheet_name='Лист1')
     return excel_data_df.to_dict(orient='records')
 
-print(read_file())
+wine_cards = read_file()
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -22,7 +22,8 @@ current_year = datetime.date.today().year
 delta_year = str(current_year - BIRTH_YEAR)
 
 rendered_page = template.render(
-    delta_year = delta_year,
+    delta_year=delta_year,
+    wine_cards=wine_cards,
 )
 
 with open('index.html', 'w', encoding="utf8") as file:
