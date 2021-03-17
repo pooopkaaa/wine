@@ -35,7 +35,14 @@ def group_wine_cards(wine_cards):
 def get_company_age():
     current_year = datetime.date.today().year
     age = current_year - BIRTH_YEAR
-    return age
+    
+    _ = age % 100
+    if _ % 10 == 1 and _ != 11:
+        return f'{age} год'
+    elif _ % 10 in [2, 3, 4] and _ not in [12, 13, 14]:
+        return f'{age} года'
+    else:
+        return f'{age} лет'
 
 
 def main():
