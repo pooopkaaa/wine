@@ -6,11 +6,10 @@ from collections import defaultdict
 import argparse
 
 BIRTH_YEAR = 1920
-FILEPATH = 'wine3.xlsx'
 
 def get_wine_cards_xlsx_filepath():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--filepath', help='Укажите путь к файлу с продукцией, по умолчанию wine3.xlsx', default='wine3.xlsx')
+    parser.add_argument('-f', '--filepath', help='Укажите путь к файлу с продукцией, по умолчанию wine.xlsx', default='wine.xlsx')
     args = parser.parse_args()
     return args.filepath
 
