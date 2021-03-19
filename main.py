@@ -7,11 +7,17 @@ import argparse
 
 BIRTH_YEAR = 1920
 
+
 def get_wine_cards_xlsx_filepath():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--filepath', help='Укажите путь к файлу с продукцией, по умолчанию wine.xlsx', default='wine.xlsx')
+    parser.add_argument(
+        '-f',
+        '--filepath',
+        help='Укажите путь к файлу с продукцией, по умолчанию wine.xlsx',
+        default='wine.xlsx')
     args = parser.parse_args()
     return args.filepath
+
 
 def read_file(filepath):
     wine_cards = pandas.read_excel(
@@ -34,7 +40,7 @@ def group_wine_cards(wine_cards):
 def get_company_age():
     current_year = datetime.date.today().year
     age = current_year - BIRTH_YEAR
-    
+
     _ = age % 100
     if _ % 10 == 1 and _ != 11:
         return f'{age} год'
@@ -65,6 +71,7 @@ def main():
 
     server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
+
 
 if __name__ == "__main__":
     main()
